@@ -5,7 +5,7 @@ import KyleeContainer from './containers/KyleeContainer';
 
 $(function() {
   ReactDOM.render(
-    <KyleeContainer/>,
+    <KyleeContainer />,
     document.getElementById('app')
   );
 });
