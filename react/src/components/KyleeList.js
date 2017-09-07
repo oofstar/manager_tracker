@@ -1,18 +1,45 @@
 import React from 'react';
-import { Link } from 'react-router';
+import ReactPaginate from 'react-paginate';
+import { browserHistory } from 'react-router';
 
-const KyleeList = props => {
-  let kylees = props.kylees.map((kylee) => <li key={kylee.id}>{kylee.name}</li>)
+class KyleeList extends React.Component {
+  constructor(props){
+    super(props)
 
-  return(
-    <div>
-      <ul>
-        {kylees}
-      </ul>
-      {props.page == 1 ? null : <Link to={`/?page=${parseInt(props.page)-1}`}>Previous</Link>}
-      <Link to={`/?page=${parseInt(props.page)+1}`}>Next</Link>
-    </div>
-  )
+    this.handlePageClick = this.handlePageClick.bind(this)
+  }
+
+  handlePageClick(data) {
+    let selected = data.selected+1;
+    browserHistory.push(`/?page=${selected}`)
+  };
+
+  render(){
+    let kylees = this.props.kylees.map((kylee) => <li key={kylee.id}>{kylee.name}</li>)
+
+    return(
+      <div>
+        <ul>
+          {kylees}
+        </ul>
+        <div className={"react-paginate"}>
+          <ReactPaginate
+            previousLabel={"previous"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break"}
+            pageCount={Math.ceil(this.props.total/10)}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+        </div>
+      </div>
+    )
+  }
 }
 
 export default KyleeList;
