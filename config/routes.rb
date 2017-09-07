@@ -6,4 +6,6 @@ Rails.application.routes.draw do
       resources :kylees, only: [:index]
     end
   end
+
+  resources :kylees, only: [:index]
 end

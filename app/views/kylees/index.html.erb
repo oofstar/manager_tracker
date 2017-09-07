@@ -1,0 +1,9 @@
+<ul>
+  <% @kylees.each do |kylee| %>
+    <li>
+      <%= kylee.name %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @kylees %>
